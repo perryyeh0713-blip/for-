@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    int maxNum, minNum;
+    int nonNegative = 0;
+    int negative = 0;
+    bool first = true;
+
+    while (cin >> n) {
+        if (n == -9999) {
+            break;
+        }
+
+        if (first) {
+            maxNum = minNum = n;
+            first = false;
+        }
+
+        if (n > maxNum) {
+            maxNum = n;
+        }
+
+        if (n < minNum) {
+            minNum = n;
+        }
+
+        if (n >= 0) {
+            nonNegative++;
+        } else {
+            negative++;
+        }
+    }
+
+    if (!first) {
+        cout << maxNum << ","
+             << minNum << ","
+             << nonNegative << ","
+             << negative << endl;
+    }
+
+    return 0;
+}
