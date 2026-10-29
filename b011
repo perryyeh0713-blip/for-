@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, c;
+
+    while (cin >> a >> b >> c) {
+        if (a + b > c &&
+            a + c > b &&
+            b + c > a) {
+            cout << "可以 ";
+        } else {
+            cout << "不可以 ";
+        }
+    }
+
+    return 0;
+}
