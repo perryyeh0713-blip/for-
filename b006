@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    // 加快輸入輸出
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    string line;
+    while (getline(cin, line)) {
+        if (line.empty()) continue;
+        
+        stringstream ss(line);
+        vector<int> prices;
+        int val;
+        
+        while (ss >> val) {
+            if (val == -9999) {
+                return 0; // 遇到 -9999 結束程式
+            }
+            prices.push_back(val);
+        }
+        
+        if (prices.empty()) continue;
+        
+        // 將商品價格由大到小排序
+        sort(prices.begin(), prices.end(), greater<int>());
+        
+        long long total = 0;
+        // 兩件為一組計算，取較高者（即排序後的奇數索引位置，因為由大到小排序，每兩件的前一項即為較大值）
+        for (size_t i = 0; i < prices.size(); i += 2) {
+            total += prices[i]; // 不論是配對中的最高價，或是落單的最後一項，都是加上當前價格
+        }
+        
+        cout << total << "\n";
+    }
+
+    return 0;
+}
