@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    // 加速輸入輸出
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string line;
+    if (getline(cin, line)) {
+        stringstream ss(line);
+        vector<int> nums;
+        int n;
+        
+        // 讀入一行中所有的正整數
+        while (ss >> n) {
+            nums.push_back(n);
+        }
+
+        if (!nums.empty()) {
+            // 找出所有數字中的最大值，決定長條圖的最大寬度
+            int max_val = *max_element(nums.begin(), nums.end());
+
+            // 依序處理每個數字並印出長條圖
+            for (int val : nums) {
+                int spaces = max_val - val; // 計算左側需要的空白數量
+                
+                // 印出空白
+                for (int i = 0; i < spaces; ++i) {
+                    cout << ' ';
+                }
+                // 印出星號
+                for (int i = 0; i < val; ++i) {
+                    cout << '*';
+                }
+                cout << '\n';
+            }
+        }
+    }
+
+    return 0;
+}
